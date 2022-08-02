@@ -98,7 +98,7 @@ export const putReviewToProduct = (payload) => async () => {
     const { idProduct } = payload;
     try {
         const { data } = await axios.put(
-            "http://localhost:3001" + "/products/putReview/" + idProduct,
+            ROUTE + "/products/putReview/" + idProduct,
             payload
         );
     } catch (error) {

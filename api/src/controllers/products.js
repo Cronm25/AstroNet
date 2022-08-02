@@ -214,7 +214,7 @@ const buyProduct = async (req, res, next) => {
         const message = `ASTRONET! Thanks for the purchase, the purchased will be delivered to "${direction}", here is your purchase order: " ${JSON.stringify(order)} "`;
         const payload = { body: { userMail: email, message }};
         await sendEmail(payload);
-        
+
         // (console.log('saliendo'))
         return res.json({msg: 'purchase order delivered'});  
     } catch (error) {
@@ -295,13 +295,13 @@ const putReview = async (req, res, next) => {
             let productsHistory = [];
             user[0].productsHistory.map(p => productsHistory.push(p));
             for (let i = 0; i < productsHistory.length; i++) { 
-                
+
                 for (let j = 0; j < productsHistory[i].detail?.length; j++) { 
                     if(productsHistory[i].detail[j].id===id){
                         productsHistory[i].detail[j].review=true
                     }
                 }
-                
+
             }
         await User.findOneAndUpdate({"username": username }, {$set: {"productsHistory": productsHistory}});
         const addReviewProduct = await Product.updateOne({"_id": id }, {$push: {"reviews": review}});
